@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countdowns</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <div id="countdown-timer" class="countdown-timer">
+      <span id="minute-display">00</span>:<span id="second-display">00</span>
+    </div>
+
+    <section id="preset-timer-buttons" class="preset-timer-buttons"></section>
+
+    <form id="timer-form" class="timer-form">
+      <p>Start a custom timer</p>
+      <div>
+        <label for="minutes">Minutes</label>
+        <input type="number" id="minutes" name="minutes" min="0" value="0" />
+      </div>
+      <div>
+        <label for="seconds">Seconds</label>
+
+        <input
+          type="number"
+          id="seconds"
+          name="seconds"
+          min="0"
+          max="60"
+          value="0"
+        />
+      </div>
+      <input type="submit" />
+    </form>
+  </body>
+</html>

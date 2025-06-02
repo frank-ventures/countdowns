@@ -1,0 +1,75 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background: rgb(150, 150, 150);
+  --primary: rgb(0, 217, 255);
+  --secondary: rgb(0, 116, 136);
+  --accent: rgb(20, 136, 0);
+  --shadow: ;
+}
+
+body {
+  background-color: var(--background);
+  height: 100vh;
+}
+
+.countdown-timer {
+  width: 100%;
+  background-color: var(--background);
+  font-size: 10rem;
+  color: var(--accent);
+
+  display: flex;
+  justify-content: center;
+}
+
+#minute-display {
+  color: var(--primary);
+}
+
+#second-display {
+  color: var(--secondary);
+}
+
+.preset-timer-buttons {
+  width: 100%;
+  padding: 1rem;
+  background-color: brown;
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.preset-button {
+  padding: 1rem;
+  background-color: antiquewhite;
+  border-radius: 10%;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-bottom: 3.5px solid black;
+  border-right: 3.5px solid black;
+
+  &:hover {
+    background-color: red;
+    cursor: pointer;
+  }
+}
+
+.timer-form {
+  width: 100%;
+  background-color: aquamarine;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+input {
+  width: 10rem;
+}

@@ -5,40 +5,54 @@
 }
 
 :root {
-  --background: rgb(150, 150, 150);
-  --primary: rgb(0, 217, 255);
-  --secondary: rgb(0, 116, 136);
+  --background: #222222;
+  --background-secondary: rgb(150, 150, 150);
+  --keyboard-beige: #e2d4c2;
+  --secondary: rgb(11, 197, 230);
   --accent: rgb(20, 136, 0);
+  --terminal-green: #4af626;
   --shadow: ;
 }
 
 body {
   background-color: var(--background);
   height: 100vh;
+  box-shadow: inset 0 0 200px #636262;
+  font-family: "Anton", sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .countdown-timer {
   width: 100%;
-  background-color: var(--background);
-  font-size: 10rem;
-  color: var(--accent);
+  padding: 1rem;
+  font-size: clamp(5rem, -3.7143rem + 24.381vw, 10rem);
 
   display: flex;
   justify-content: center;
+  gap: 1rem;
 }
 
-#minute-display {
-  color: var(--primary);
-}
-
-#second-display {
-  color: var(--secondary);
+.flip-clock-card {
+  background-color: black;
+  border-radius: 20px;
+  border: 2px solid var(--accent);
+  padding: 1rem;
+  position: relative;
+  color: var(--terminal-green);
+  text-shadow: 2px 2px 2px var(--accent);
 }
 
 .preset-timer-buttons {
   width: 100%;
+  max-width: 700px;
+  margin-inline: auto;
   padding: 1rem;
-  background-color: brown;
+  background-color: var(--accent);
+  border-top: 2px solid var(--terminal-green);
+  border-bottom: 2px solid var(--terminal-green);
 
   display: flex;
   justify-content: center;
@@ -46,30 +60,79 @@ body {
   gap: 1rem;
 }
 
-.preset-button {
-  padding: 1rem;
-  background-color: antiquewhite;
-  border-radius: 10%;
+.buttons {
+  padding: 1.5rem;
+  background-color: var(--keyboard-beige);
+  font-size: medium;
+
+  border-radius: 10px;
   border-top: 1px solid black;
   border-left: 1px solid black;
   border-bottom: 3.5px solid black;
   border-right: 3.5px solid black;
 
   &:hover {
-    background-color: red;
+    background-color: var(--secondary);
     cursor: pointer;
   }
 }
 
 .timer-form {
   width: 100%;
-  background-color: aquamarine;
+  max-width: 700px;
+  margin-inline: auto;
+  padding: 1rem;
+  background-color: var(--accent);
+  border-top: 2px solid var(--terminal-green);
+  border-bottom: 2px solid var(--terminal-green);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1rem;
 }
 
+label {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
 input {
-  width: 10rem;
+  width: 70%;
+  height: 2rem;
+  font-size: 2rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+
+  background-color: var(--background);
+  color: var(--terminal-green);
+
+  box-shadow: inset 0 0 15px #636262;
+}
+
+.animated-shape {
+  --gradientpercent: 100%;
+  width: 100px;
+  background: conic-gradient(
+    var(--accent) var(--gradientpercent),
+    var(--terminal-green) 0
+  );
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 2px solid rgb(255, 255, 255);
+  position: relative;
+
+  margin-inline: auto;
+  margin-block: 2rem;
+}
+
+.animated-shape::before {
+  content: "";
+  position: absolute;
+  inset: 20px;
+  border-radius: inherit;
+  background: black;
+  border: 2px solid rgb(255, 255, 255);
 }

@@ -5,6 +5,7 @@ const timerForm = document.getElementById("timer-form");
 
 // Initial variables
 let initialTimeInSeconds;
+let currentTime;
 let remainingMinutes;
 let remainingSeconds;
 
@@ -47,6 +48,8 @@ const presetTimers = [
 // Put our preset timers onto the DOM
 const presetTimerButtons = document.getElementById("preset-timer-buttons");
 
+const animatedShape = document.getElementById("animatedShape");
+
 presetTimers.forEach((button) => {
   const newButton = document.createElement("button");
   newButton.innerText = button.label;
@@ -54,16 +57,21 @@ presetTimers.forEach((button) => {
   newButton.addEventListener("click", () => {
     timerInitialiser(button.time);
   });
-  newButton.classList = "preset-button";
+  newButton.classList = "buttons";
   presetTimerButtons.append(newButton);
 });
 
 function timerInitialiser(timeInSeconds) {
   initialTimeInSeconds = timeInSeconds;
+  currentTime = timeInSeconds;
   remainingMinutes = Math.floor(initialTimeInSeconds / 60);
   remainingSeconds = initialTimeInSeconds - remainingMinutes * 60;
   minuteDisplay.textContent = remainingMinutes.toString().padStart(2, "0");
   secondDisplay.textContent = remainingSeconds.toString().padStart(2, "0");
+  document.title = `${remainingMinutes
+    .toString()
+    .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+  animatedShape.style.setProperty("--gradientpercent", "100%");
   clearInterval(timer);
   timer = setInterval(intervalTimer, 1000);
 }
@@ -83,16 +91,23 @@ timerForm.addEventListener("submit", (event) => {
 });
 
 function intervalTimer() {
-  if (initialTimeInSeconds > 0) {
-    initialTimeInSeconds = initialTimeInSeconds - 1;
+  if (currentTime > 0) {
+    currentTime = currentTime - 1;
   }
 
-  remainingMinutes = Math.floor(initialTimeInSeconds / 60);
-  remainingSeconds = initialTimeInSeconds - remainingMinutes * 60;
+  remainingMinutes = Math.floor(currentTime / 60);
+  remainingSeconds = currentTime - remainingMinutes * 60;
+  document.title = `${remainingMinutes
+    .toString()
+    .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
+
   minuteDisplay.textContent = remainingMinutes.toString().padStart(2, "0");
   secondDisplay.textContent = remainingSeconds.toString().padStart(2, "0");
 
-  if (initialTimeInSeconds == 0) {
+  let timePercentage = (currentTime / initialTimeInSeconds) * 100;
+  animatedShape.style.setProperty("--gradientpercent", timePercentage + "%");
+
+  if (currentTime == 0) {
     clearInterval(timer);
   }
 }

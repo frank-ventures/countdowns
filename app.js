@@ -3,6 +3,26 @@ const minuteDisplay = document.getElementById("minute-display");
 const secondDisplay = document.getElementById("second-display");
 const timerForm = document.getElementById("timer-form");
 
+// Sound
+const audioSelection = [
+  {
+    asset: new Audio("./assets/ready-steady-cook-one-minute.mp3"),
+    timeToStartAt: 60,
+  },
+  {
+    asset: new Audio("./assets/ready-steady-cook-thirty-secs.mp3"),
+    timeToStartAt: 36,
+  },
+  {
+    asset: new Audio("./assets/deep-countdown-blast-off.mp3"),
+    timeToStartAt: 10,
+  },
+  {
+    asset: new Audio("./assets/deep-countdown.mp3"),
+    timeToStartAt: 10,
+  },
+];
+
 // Initial variables
 let initialTimeInSeconds;
 let currentTime;
@@ -62,6 +82,9 @@ presetTimers.forEach((button) => {
 });
 
 function timerInitialiser(timeInSeconds) {
+  const soundToPlay = setAudio();
+  soundToPlay ? soundToPlay.asset.pause() : "";
+
   initialTimeInSeconds = timeInSeconds;
   currentTime = timeInSeconds;
   remainingMinutes = Math.floor(initialTimeInSeconds / 60);
@@ -73,7 +96,7 @@ function timerInitialiser(timeInSeconds) {
     .padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
   animatedShape.style.setProperty("--gradientpercent", "100%");
   clearInterval(timer);
-  timer = setInterval(intervalTimer, 1000);
+  timer = setInterval(() => intervalTimer(soundToPlay), 1000);
 }
 
 timerForm.addEventListener("submit", (event) => {
@@ -90,9 +113,12 @@ timerForm.addEventListener("submit", (event) => {
   timerInitialiser(fullTime);
 });
 
-function intervalTimer() {
+function intervalTimer(soundToPlay) {
   if (currentTime > 0) {
     currentTime = currentTime - 1;
+  }
+  if (currentTime == soundToPlay.timeToStartAt) {
+    soundToPlay.asset.play();
   }
 
   remainingMinutes = Math.floor(currentTime / 60);
@@ -104,10 +130,19 @@ function intervalTimer() {
   minuteDisplay.textContent = remainingMinutes.toString().padStart(2, "0");
   secondDisplay.textContent = remainingSeconds.toString().padStart(2, "0");
 
+  if (currentTime == 0) {
+    document.title = `Time's Up!`;
+  }
+
   let timePercentage = (currentTime / initialTimeInSeconds) * 100;
   animatedShape.style.setProperty("--gradientpercent", timePercentage + "%");
 
   if (currentTime == 0) {
     clearInterval(timer);
   }
+}
+
+function setAudio() {
+  const randomNumber = Math.floor(Math.random() * audioSelection.length);
+  return audioSelection[randomNumber];
 }

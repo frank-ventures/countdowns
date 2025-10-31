@@ -21,6 +21,14 @@ const audioSelection = [
     asset: new Audio("./assets/deep-countdown.mp3"),
     timeToStartAt: 10,
   },
+  {
+    asset: new Audio("./assets/countdown-theme.mp3"),
+    timeToStartAt: 32,
+  },
+  {
+    asset: new Audio("./assets/apollo-11.mp3"),
+    timeToStartAt: 15,
+  },
 ];
 
 // Initial variables

@@ -29,6 +29,10 @@ const audioSelection = [
     asset: new Audio("./assets/apollo-11.mp3"),
     timeToStartAt: 15,
   },
+  {
+    asset: new Audio("./assets/apollo-11-one-minute.mp3"),
+    timeToStartAt: 54,
+  },
 ];
 
 // Initial variables
